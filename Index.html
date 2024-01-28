@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        #quiz-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        #question-img {
+            max-width: 100%;
+            height: auto;
+        }
+        #feedback {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="quiz-container">
+        <h2>Quiz de preguntas</h2>
+        <div id="question">
+            <p>¿Cuál es la capital de Francia?</p>
+            <img id="question-img" src="paris.jpg" alt="Paris">
+        </div>
+        <div id="options">
+            <button onclick="checkAnswer(this)">Madrid</button>
+            <button onclick="checkAnswer(this)">Roma</button>
+            <button onclick="checkAnswer(this)">Londres</button>
+            <button onclick="checkAnswer(this)">París</button>
+        </div>
+        <div id="feedback"></div>
+    </div>
+
+    <script>
+        let lives = 5;
+
+        function checkAnswer(btn) {
+            const correctAnswer = "París";
+            const selectedAnswer = btn.textContent;
+
+            if (selectedAnswer === correctAnswer) {
+                document.getElementById('feedback').style.color = 'green';
+                document.getElementById('feedback').textContent = '¡Respuesta correcta!';
+                setTimeout(nextQuestion, 2000);
+            } else {
+                lives--;
+                document.getElementById('feedback').style.color = 'red';
+                document.getElementById('feedback').textContent = `Respuesta incorrecta. Te quedan ${lives} vidas.`;
+                if (lives === 0) {
+                    document.getElementById('feedback').textContent = '¡Juego terminado!';
+                    document.getElementById('options').innerHTML = '';
+                }
+            }
+        }
+
+        function nextQuestion() {
+            // Aquí podrías implementar la lógica para cargar la siguiente pregunta
+            // Por simplicidad, este ejemplo solo muestra un mensaje de finalización
+            document.getElementById('feedback').textContent = '¡Siguiente pregunta!';
+        }
+    </script>
+</body>
+</html>
